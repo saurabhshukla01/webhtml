@@ -1,0 +1,43 @@
+<!--<html>
+<head>
+    <title>Rotate image using JavaScript</title>
+</head>
+
+<body>
+    <p>90</p>
+    <img src="C:\Users\Sourabh\Desktop\PruDigitalmedia\Image\niddle.png" id="myimage"  alt="" />
+</body>
+
+<script>
+    function rotateImage() {
+        var img = document.getElementById('myimage');
+        img.style.transform = 'rotate(180deg)';
+    }
+	
+	$(document).ready(function(){
+		rotateImage();
+	});
+</script>
+</html>-->
+
+<html>
+<head>
+    <title>Rotate image using JavaScript</title>
+</head>
+
+<body>
+    <p>Click on the image to rotate it 180 degrees clock wise.</p>
+    <img src="C:\Users\Sourabh\Desktop\PruDigitalmedia\Image\niddle.png"  id="myimage"  alt="" />
+</body>
+
+<script>
+    function rotateImage() {
+        var img = document.getElementById('myimage');
+        img.style.transform = 'rotate(90deg)';
+    }
+	
+	$(document).ready(function(){
+		rotateImage();
+	});
+</script>
+</html>

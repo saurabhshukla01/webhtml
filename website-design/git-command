@@ -1,0 +1,25 @@
+  $ history
+  $ pwd
+  $ cd Desktop/
+  $ cd website-design
+  $ ls
+  $ ls -la
+  $ git init
+  $ git remote
+  $ git add --all
+  $ git commit -m 'added website-design'
+  $ git config --global user.email "ss7838094755@gmail.com"
+  $ git config --global user.name "saurabhshukla01"
+  $ git commit -m 'added website-design'
+  $ git remote add origin https://github.com/saurabhshukla01/website-design.git
+  $ git push -u origin master
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+now github command --->  using 
+
+$ git clone https://github.com/saurabhshukla01/website-design.git
+$ git add --all
+$ git commit -m 'added website-design'
+$ git push -u origin master

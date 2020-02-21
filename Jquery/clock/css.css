@@ -1,0 +1,53 @@
+html, body, .container{
+	height: 100%;
+}
+
+.container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.clock{
+	postion:relative;
+	width: 450px;
+	height: 450px;
+	background: url('clock.jpg');
+	background-repeat: no-repeat;
+}
+
+.clock:after{
+	position: absolute;
+	content: '';
+	background: #000;
+	width: 20px;
+	height: 20px;
+	top: 207px;
+    right: 707px;
+	transform: translate(-50%);
+}
+
+.h_hands{
+	position: absolute;
+	top: 188px;
+	right: 650px;
+	width: 80px;
+	height: 60px;
+}
+
+
+.m_hands {
+    position: absolute;
+    top: 183px;
+    right: 640px;
+    width: 90px;
+    height: 70px;
+}
+
+.s_hands {
+    position: absolute;
+	top:  150px;
+	right: 685px;
+	width: 50px;
+	height: 80px;
+}

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <title>Gogetscore</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />-->
+      <link href="Gogetscore_files/bootstrap.css" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" type="text/css" href="Gogetscore_files/style.css">
+      <link rel="stylesheet" type="text/css" href="Gogetscore_files/font-awesome.css">
+      <link href="Gogetscore_files/css.css" rel="stylesheet">
+      <script type="text/javascript" async="" src="Gogetscore_files/analytics.js"></script><script src="Gogetscore_files/jquery-1.js"></script>
+      <!---FIREBASE-->
+      <script src="Gogetscore_files/firebase.js"></script>
+      <script src="Gogetscore_files/jquery_002.js"></script>
+      <link rel="manifest" href="http://gogetscore.sheenz.in//manifest.json">
+      <script>
+      // Initialize Firebase
+      /*Update this config*/
+      var config = {
+        apiKey: "AIzaSyCrH5SJQu9nQY2xbAdmU1UxXSV_nR9YmUQ",
+        authDomain: "love-test-e3a5b.firebaseapp.com",
+        databaseURL: "https://love-test-e3a5b.firebaseio.com",
+        projectId: "love-test-e3a5b",
+        storageBucket: "",
+        messagingSenderId: "362474316616",
+        appId: "1:362474316616:web:1e617bef60eb1ecc"
+      };
+      firebase.initializeApp(config);
+      // Retrieve Firebase Messaging object.
+      const messaging = firebase.messaging();
+      messaging.requestPermission()
+      .then(function() {
+        console.log('Notification permission granted.');
+        // TODO(developer): Retrieve an Instance ID token for use with FCM.
+        if(isTokenSentToServer()) {
+          console.log('Token already saved.');
+        } else {
+          getRegToken();
+        }
+      })
+      .catch(function(err) {
+        console.log('Unable to get permission to notify.', err);
+      });
+      function getRegToken(argument) {
+        messaging.getToken()
+          .then(function(currentToken) {
+            if (currentToken) {
+              saveToken(currentToken);
+              //console.log(currentToken);
+              setTokenSentToServer(true);
+            } else {
+              console.log('No Instance ID token available. Request permission to generate one.');
+              setTokenSentToServer(false);
+            }
+          })
+          .catch(function(err) {
+            console.log('An error occurred while retrieving token. ', err);
+            setTokenSentToServer(false);
+          });
+      }
+      function setTokenSentToServer(sent) {
+          window.localStorage.setItem('sentToServer', sent ? 1 : 0);
+      }
+
+      function isTokenSentToServer() {
+          return window.localStorage.getItem('sentToServer') == 1;
+      }
+
+      function saveToken(currentToken) {
+        $.ajax({
+          url: 'http://gogetscore.sheenz.in//action.php',
+          method: 'post',
+          data: 'token=' + currentToken
+        }).done(function(result){
+          //console.log(result);
+        })
+      }
+      messaging.onMessage(function(payload) {
+        console.log("Message received. ", payload);
+        notificationTitle = payload.data.title;
+        notificationOptions = {
+          body: payload.data.body,
+          icon: payload.data.icon,
+          image:  payload.data.image
+        };
+        var notification = new Notification(notificationTitle,notificationOptions);
+      });
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="Gogetscore_files/js"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-147967529-1');
+</script>
+   </head>
+   <body>
+      <!-- header-->
+      <!--Main Navigation-->
+      <header>
+         <!-- top bar start-->
+         <div class="top-main">
+            <div class="number">
+               <h3><i class="fa fa-phone" aria-hidden="true"></i> +91 966 777 3509 </h3>
+               <div class="clearfix"></div>
+            </div>
+            <div class="social-icons">
+               <ul class="top-icons">
+                  <li><a href="https://www.facebook.com/Prudigital-Media-111898976862204/?modal=admin_todo_tour" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                  <li><a href="https://twitter.com/prudigital" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                  <li><a href="https://www.pinterest.com/prudigital" target="_blank"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                  <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+               </ul>
+            </div>
+            <div class="clearfix"></div>
+         </div>
+         <!-- top Bar end -->
+         <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+               <h1><a class="navbar-brand text-capitalize" href="#"><img src="Gogetscore_files/logo.png" alt="logo" style="width:250px;"></a></h1>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav text-center  ml-lg-auto">
+          					<li class="nav-item active  mr-3">
+          							<a class="nav-link" href="#">Home
+          								<span class="sr-only">(current)</span>
+          							</a>
+          						</li>
+          						<li class="nav-item  mr-3">
+          							<a class="nav-link" href="#">Credit Card</a>
+          						</li>
+          						<li class="nav-item  mr-3">
+          							<a class="nav-link" href="#">About Us</a>
+          						</li>
+          						<li class="nav-item dropdown mr-3">
+          							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          								Loan
+          							</a>
+          							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          								<a class="dropdown-item" href="#">Personal Loan</a>
+          								<a class="dropdown-item" href="#">Home Loan</a>
+          								<a class="dropdown-item" href="#">Car Loan</a>
+          								<a class="dropdown-item" href="#">Business Loan</a>
+          								<a class="dropdown-item" href="#">Gold Loan</a>
+          							</div>
+          						</li>
+          						<li class="nav-item">
+          							<a class="nav-link" href="#">Contact Us</a>
+          						</li>						
+          						          						<li class="nav-item dropdown mr-3">
+          							<a class="nav-link dropdown-toggle profile-tab" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          								Profile
+          							</a>
+          							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          								<a class="dropdown-item" href="#">saurabh </a>
+          								           								 <a class="dropdown-item" href="http://gogetscore.sheenz.in//user_registration/logout">Logout</a>
+          								 
+          								           							</div>
+          						</li>
+          				  				          </ul>
+               </div>
+            </div>
+         </nav>
+      </header>
+<!--Form-->
+<section class="form-section">
+   <div class="">
+      <div class="row">
+         <div class="col-lg-7">
+            <div class="left-side">
+               <div class="panel panel-primary">
+                  <div class="panel-body">
+                     <div class="alert alert-danger" id="error-message" style="display:none">
+                        
+                     </div>
+                     <form name="basicform" id="basicform" method="post" action="" novalidate="novalidate">
+                        <div class="panel-heading">
+                           <h3 class="panel-title">Get your Credit Score in quick steps!</h3>
+                        </div>
+                        <div id="sf1" class="frm">
+                           <fieldset>
+                              <!-- <legend>Step 1 </legend> -->
+                              <div class="field-box">
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_name">Your Name</label>
+                                    <input type="text" id="user_name" class="form-input" name="user_name">
+                                 </div>
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_email">Your Email</label>
+                                    <input type="email" id="user_email" class="form-input" name="user_email">
+                                 </div>
+                              </div>
+                              <div class="field-box">
+                                 <div class="form-group">
+                                    <label class="form-label" for="gender" style="position:relative; top:0px;">Gender</label>
+                                    <div class="genderradio">
+                                       <input class="form-check-input" type="radio" name="user_gender" id="user_gender" value="Male">
+                                       <label class="form-check-label m-t-30" for="user_gender_1">Male</label>
+                                       <input class="form-check-input" type="radio" name="user_gender" id="user_gender" value="Female">
+                                       <label class="form-check-label" for="user_gender_2">Female</label>
+                                    </div>
+                                 </div>
+								 
+			
+                                 <div class="form-group">
+                                    <label class="form-label large-date" for="user_dob">Date of Birth</label>
+				    <span class="small-date">Date of Birth</span>
+                                    <input type="text" id="user_dob" name="user_dob" class="form-control form-input date-form-input hasDatepicker" autocomplete="off">
+                                 </div>
+                              </div>
+                              <div class="field-box">
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_mobile">Mobile Number</label>
+                                    <input type="text" id="user_mobile" class="form-input" name="user_mobile">
+                                 </div>
+                                 <div class="form-group">
+                                    <!--<label class="form-label" for="user_martial_status">Marital Status</label>-->
+                                    <select class="form-input" name="user_martial_status" id="user_martial_status">
+                                       <option disabled="disabled" selected="selected">Marital Status</option>
+                                       <option value="Married">Married</option>
+                                       <option value="Unmarried">Unmarried</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="field-box">
+                                 <div class="form-group">
+                                    <!-- <label class="form-label" for="lookfor">Looking For</label>-->
+                                    <select class="form-input" name="user_looking_for" id="user_looking_for">
+                                       <option value="" disabled="disabled" selected="selected">Looking For</option>
+										<option value="1">Credit Card</option>
+										<option value="2">Personal Loan</option>
+										<option value="3">Business Loan</option>
+										<option value="4">Travel Loan</option>
+										<option value="5">Marriage Loan</option>
+										<option value="6">Car Loan</option>
+										<option value="7">Two Wheeler Loan</option>
+										<option value="8">Medical Loan</option>
+										<option value="9">Education Loan</option>
+										<option value="10">Gold Loan</option>
+										<option value="11">Home Loan</option>
+										<option value="12">Debt Consolidation Loans</option>
+										<option value="13">Bridge Loan</option>
+										<option value="14">Festival Loan</option>
+										<option value="15">Signature Loan</option>
+										<option value="16">Top-up Loan</option>
+										<option value="17">Holiday Loan</option>
+										<option value="18">Agricultural Loan</option>
+										<option value="19">Home Renovation Loan</option>
+										<option value="20">Overdraft Loan</option>
+										<option value="21">Consumer Durable Loan</option>
+
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="form-group submit">
+                                 <div class="">
+                                    <button class="btn btn-primary open1 submit-btn" id="step-1-btn" type="button">Submit </button> 
+                                 </div>
+                              </div>
+                           </fieldset>
+                        </div>
+                        <!-- <div id="sf2" class="frm" style="display: none;"> -->
+                        <div id="sf2" class="frm" style="display: none;">
+                           <fieldset>
+                              <legend>Step 1 </legend>
+                              <div class="field-box">
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_address_1">Address Line 1</label>
+                                    <textarea id="user_address_1" class="form-input" name="user_address_1"></textarea>
+                                 </div>
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_address_2">Address Line 2</label>
+                                    <textarea id="user_address_2" class="form-input" name="user_address_2"></textarea>
+                                 </div>
+                              </div>
+                              <div class="field-box">
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_pincode">Pincode</label>
+                                    <input type="text" id="user_pincode" class="form-input" name="user_pincode">
+                                 </div>
+                                 <div class="form-group" id="state-data"><select class="form-input" id="user_state" name="user_state" onchange="get_city();">
+					<option value="0" disabled="disabled" selected="selected">State</option><option value="1">Andaman &amp; Nicobar Islands</option><option value="2">Andhra Pradesh</option><option value="3">Arunachal Pradesh</option><option value="4">Assam</option><option value="5">Bihar</option><option value="6">Chandigarh</option><option value="7">Chhattisgarh</option><option value="8">Dadra &amp; Nagar Haveli</option><option value="9">Daman &amp; Diu</option><option value="10">Delhi</option><option value="11">Goa</option><option value="12">Gujarat</option><option value="13">Haryana</option><option value="14">Himachal Pradesh</option><option value="15">Jammu &amp; Kashmir</option><option value="16">Jharkhand</option><option value="17">Karnataka</option><option value="18">Kerala</option><option value="19">Lakshadweep</option><option value="20">Madhya Pradesh</option><option value="21">Maharashtra</option><option value="22">Manipur</option><option value="23">Meghalaya</option><option value="24">Mizoram</option><option value="25">Nagaland</option><option value="26">Odisha</option><option value="27">Puducherry</option><option value="28">Punjab</option><option value="29">Rajasthan</option><option value="30">Sikkim</option><option value="31">Tamil Nadu</option><option value="32">Telangana</option><option value="33">Tripura</option><option value="34">Uttar Pradesh</option><option value="35">Uttarakhand</option><option value="36">West Bengal</option></select></div>
+                              </div>
+                              <div class="field-box">
+                                 <div class="form-group" id="city-data">
+                                    <select class="form-input" id="user_city" name="user_city">
+                                       <option value="0" disabled="disabled" selected="selected">City</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="field-box" id="other-city" style="display:none">
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_city_name">City name</label>
+                                    <input type="text" id="user_city_name" class="form-input" name="user_city_name">
+                                 </div>
+                              </div>
+                              <div class="form-group submit">
+                                 <div class="">
+                                    <!--<button class="btn btn-warning back-btn back2" type="button"><span class="fa fa-arrow-left"></span> Back</button>  -->
+                                    <button class="btn btn-primary open2 submit-btn" id="step-2-btn" type="button">
+                                       Save &amp; Continue <!--<span class="fa fa-arrow-right"></span>-->
+                                    </button>
+                                 </div>
+                              </div>
+                           </fieldset>
+                        </div>
+                        <div id="sf3" class="frm" style="display: none;">
+                           <fieldset>
+                              <legend>Step 2 </legend>
+                              <div class="field-box">
+                                 <div class="form-group">
+                                    <select class="form-input" id="user_employement_status" name="user_employement_status">
+                                       <option value="0" disabled="disabled" selected="selected">Employement Status</option>
+                                       <option value="Salaried">Salaried</option>
+                                       <option value="Self Employed">Self Employed</option>
+                                    </select>
+                                 </div>
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_company_name">Company Name</label>
+                                    <input type="text" id="user_company_name" class="form-input" name="user_company_name">
+                                 </div>
+                              </div>
+                              <div class="field-box">
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_monthly_salary">Monthly Salary</label>
+                                    <input type="text" id="user_monthly_salary" class="form-input" name="user_monthly_salary">
+                                 </div>
+                              </div>
+                              <div class="form-group submit">
+                                 <div class="">
+                                    <button class="btn btn-warning back-btn back3" type="button">
+                                       <!--<span class="fa fa-arrow-left"></span> -->Back
+                                    </button>
+                                    <button class="btn btn-primary open3 submit-btn" id="step-3-btn" type="button">Save &amp; Continue </button> 
+                                 </div>
+                              </div>
+                           </fieldset>
+                        </div>
+                        <div id="sf4" class="frm" style="display: none;">
+                           <fieldset>
+                              <legend>Step 3 </legend>
+                              <div class="field-box">
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_pancard">Pancard Number</label>
+                                    <input type="text" id="user_pancard" class="form-input" name="user_pancard">
+                                 </div>
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_adhaar_no">Aadhar Number</label>
+                                    <input type="text" id="user_adhaar_no" class="form-input" name="user_adhaar_no">
+                                 </div>
+                              </div>
+                              <div class="field-box">
+                                 <div class="form-group">
+                                    <label class="form-label" for="user_passport_no">Passport Number</label>
+                                    <input type="text" id="user_passport_no" class="form-input" name="user_passport_no">
+                                 </div>
+                              </div>
+                              <div class="form-group submit">
+                                 <div class="">
+                                    <button class="btn btn-primary open4 submit-btn" id="step-4-btn" type="button">Submit </button> 
+                                 </div>
+                              </div>
+                           </fieldset>
+                        </div>
+                     </form>
+                     <div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-5 float-right rgt-image">
+            <!--<img src="/assets/images/banner-image.png" alt="" />-->
+			<div class="credit-score-circle_box">
+                <div class="credit-score">
+                    <div class="score-niddle">
+                        <div class="">
+                            <div class="wrapper rotate-1">
+                                <div class="inner-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                     <script src='jquery.keyframes[.min].js'></script>
+					 <script>
+					 $.keyframe.define([{
+						name: 'rotate',
+						'0%': {'height': '70px'},
+						'30%': {'height': '10px'},
+						'60%': {'height': '30px'},
+						'100%': {'height': '10px'}
+					}]);
+					$.keyframe.define({
+						name: 'rotate',
+						from: {
+							'transform': 'rotate(0deg)'
+						},
+						to: {
+							'transform': 'rotate(360deg)'
+						}
+					});
+					 </script>
+                     <div class="credit-score-text">780</div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<!--banner bottom section-->
+<section class="services" id="services">
+   <div class="container">
+      <div class="services-heading">
+         <h3>What GoGetScore offer's ?</h3>
+      </div>
+      <div class="row">
+         <div class="col-sm-3 service-grid-text">
+            <div class="offer-box">
+               <div class="icon">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+               </div>
+               <h4>Grow Your Score</h4>
+               <p>Grow Your Score Hey!! Are you new to credit world? We 
+will help you build your credit by hand holding you the entire way. We 
+will guide you to the best loans &amp; credit cards.</p>
+            </div>
+         </div>
+         <div class="col-sm-3 service-grid-text">
+            <div class="offer-box">
+               <div class="icon">
+                  <i class="fa fa-line-chart" aria-hidden="true"></i>
+               </div>
+               <h4>Credit Reputation Building</h4>
+               <p>We can help you to fix your past credit issues, 
+improve your credit score and thereby get low interest loans &amp; 
+higher limit on your credit cards.</p>
+            </div>
+         </div>
+         <div class="col-sm-3 service-grid-text">
+            <div class="offer-box">
+               <div class="icon">
+                  <i class="fa fa-tachometer" aria-hidden="true"></i>
+               </div>
+               <h4>Get Free Credit <br>Score</h4>
+               <p>Yes Now You can check your credit score for free on our GoGetScore as frequently as you want and get monthly updates from us.</p>
+            </div>
+         </div>
+         <div class="col-sm-3 service-grid-text">
+            <div class="offer-box">
+               <div class="icon">
+                  <i class="fa fa-credit-card" aria-hidden="true"></i>
+               </div>
+               <h4>Top Loans &amp; Credit Cards</h4>
+               <p>We can help you to reduce your EMI’s by getting you 
+the most suitable loans and credit cards matching your credit profile. 
+We enable you to make efficient financial judgments in your life.</p>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<!-- banner bottom section-->
+<!--  why section-->
+<section class="why-section">
+   <div class="">
+      <div class="heading">
+         <h2>Why GoGetScore?</h2>
+      </div>
+      <div class="row">
+         <div class="col-sm-6 why1">
+            <h4>Safe,secure and convenient banking</h4>
+            <p>We work with major banks/ lenders in india to give you a diversity of options on loans and credit cards.</p>
+         </div>
+         <div class="col-sm-6 why2">
+            <h4>Safe,secure and convenient banking</h4>
+            <p>Secured profile will 100% assurance, your financial details are safe with us and won’t be shared.</p>
+         </div>
+         <div class="col-sm-6 why3">
+            <h4>Safe,secure and convenient banking</h4>
+            <p>We provide best in class and latest services to cater to all your financial needs.</p>
+         </div>
+         <div class="col-sm-6 why4">
+            <h4>Safe,secure and convenient banking</h4>
+            <p>More than 2 million people have begun their journey with GoGetScore towards a knowledgeable credit life format.</p>
+         </div>
+      </div>
+   </div>
+</section>
+<!-- why section-->
+<!-- testimonials -->
+<section>
+   <div class="container">
+      <div class="row">
+         <div class="col-md-8 col-center m-auto">
+            <h2 class="text-center">What do our happy customers has to say?</h2>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+               <!-- Carousel indicators -->
+               <ol class="carousel-indicators">
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+                  <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+               </ol>
+               <!-- Wrapper for carousel items -->
+               <div class="carousel-inner">
+                  <div class="item carousel-item active">
+                     <div class="img-box"><img src="Gogetscore_files/testimonials-image.jpg" alt=""></div>
+                     <p class="testimonial"><span>Timely Update On Score Change</span>
+                        My credit score has updates has helped me to 
+improve considerably within a span of 1 year. My sincere thanks to your 
+GoGetScore Team and I am happy with teams professionalism .
+                     </p>
+                     <p class="overview"><b>- Krishnan Iyer</b>, Chennai</p>
+                  </div>
+                  <div class="item carousel-item">
+                     <div class="img-box"><img src="Gogetscore_files/testimonials-image.jpg" alt=""></div>
+                     <p class="testimonial"><span>Awsome Support</span>
+                        I am very glad to tell you that my Yes Bank 
+Credit card problem is solved and I am very thankful to you because it 
+got resolved only because of your help. CITI Bank has confirmed that 
+there is no due amount to be paid from my part. Thank you very much for 
+your support and the care you took for my issue. Special thanks to Mr. 
+Vikram for taking care of my issue.
+                     </p>
+                     <p class="overview"><b>- Nitish Verma</b>, Bhopal</p>
+                  </div>
+				  
+                  <div class="item carousel-item">
+                     <div class="img-box"><img src="Gogetscore_files/testimonials-image.jpg" alt=""></div>
+                     <p class="testimonial"><span>Awsome Support</span>
+                        I am very glad to tell you that my Yes Bank 
+Credit card problem is solved and I am very thankful to you because it 
+got resolved only because of your help. CITI Bank has confirmed that 
+there is no due amount to be paid from my part. Thank you very much for 
+your support and the care you took for my issue. Special thanks to Mr. 
+Vikram for taking care of my issue.
+                     </p>
+                     <p class="overview"><b>- Anek Verma</b>, Punjab</p>
+                  </div>
+               </div>
+               <!-- Carousel controls -->
+               <a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+               <i class="fa fa-angle-left"></i>
+               </a>
+               <a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+               <i class="fa fa-angle-right"></i>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<!-- testimonials -->
+
+<script src="Gogetscore_files/jquery.js"></script>
+<script src="Gogetscore_files/validation.js" +time()=""></script>
+<script src="Gogetscore_files/user_registration.js" +time()=""></script>
+
+
+<form id="mobile_otp_frm" name="mobile-mobile_otp_frm" action="" method="post" class="verify_form" novalidate="novalidate">
+   <div class="modal" id="mobile-otp-verification-modal" role="dialog">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header ">
+               <h5 id="exampleModalLabel">Verify Mobile Number</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">×</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="form-group">
+                  <label for="mobile_no">Mobile Number</label>
+                  <input type="text" id="mobile_no" name="mobile_no" data-placeholder="mobile_no" disabled="disabled">
+                  </div>
+				  <div class="form-group">
+                  <label for="otp">Enter OTP</label>
+                  <input type="text" id="otp" name="otp" data-placeholder="Enter OTP">
+				  <p><a id="otp-resend-href" href="javascript:void(0);" onclick="resend_otp();">Resend OTP</a></p>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-primary submit-btn" id="btn-verify-otp">Verify Otp</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</form>  
+
+<!--login form pop up -->
+
+<form id="login_mobile_frm" name="login_mobile_frm" action="" method="post" class="verify_form">
+<div class="modal" id="login-mobile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 id="exampleModalLabel" class="modal-title w-100 font-weight-bold">Login</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+      <div class="alert alert-danger" id="login-mobile-message" style="display:none"></div>
+			<div class="">
+					<label class="form-label" for="verifyphone" style="font-size: 12px;margin-left: 20px;">Enter your Phone number</label>
+					<input type="text" id="login_mobile_no" class="form-input" name="login_mobile_no" data-placeholder="login_mobile_no">
+				  </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+			<!-- <div class="btn btn-primary submit-btn" id="btn-mobile-login" data-dismiss="modal" onclick="javascript:auth_user();" data-toggle="modal" data-target="#modalLoginFormverify">Submit</div>  -->
+            <button type="button" class="btn btn-primary submit-btn" id="btn-mobile-login" onclick="javascript:auth_user();">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+<!--login form verify  pop up -->
+
+<div class="modal fade" id="modalLoginFormverify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Enter OTP</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3 text-center">
+			<form method="get" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+					<input type="text" id="digit-1" name="digit-1" data-next="digit-2">
+					<input type="text" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1">
+					<span class="splitter">–</span>
+					<input type="text" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2">
+					<input type="text" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3">
+				</form>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+			<div class="btn btn-primary submit-btn" data-toggle="modal" data-target="#modalLoginFormverify">Verify</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<form id="login_otp_frm" name="login_otp_frm" action="" method="post" class="verify_form">
+   <div class="modal" id="login-mobile-otp-verification-modal" role="dialog">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header ">
+               <h5 id="exampleModalLabel">Login</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">×</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="alert alert-danger" id="login-mobile-otp-message" style="display:none"></div>
+               <div class="form-group">
+                  <label for="login_opt_mobile_no">Mobile Number</label>
+                  <input type="text" id="login_opt_mobile_no" name="login_opt_mobile_no" data-placeholder="login_opt_mobile_no" disabled="disabled">
+                  </div>
+				  <div class="form-group">
+                  <label for="login_otp">Enter OTP</label>
+                  <input type="text" id="login_otp" name="login_otp" data-placeholder="Enter OTP">
+				  <p><a id="otp-resend-href" href="javascript:void(0);" onclick="resend_otp();">Resend OTP</a></p>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-primary submit-btn" id="btn-login-otp" onclick="javascript:auth_login_otp();">Submit</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</form>  
+ <!-- foooter-->
+ <footer>
+		
+      <div class="copyright">
+         Please Note***** GoGetScore will never ask you to make a 
+payment anywhere outside the secure GoGetScore website. DO NOT make 
+payment to any other bank account or wallet or divulge your bank/card 
+details to fraudsters and imposters claiming to be operating on our 
+behalf.
+      </div>
+	  <div class="text-center">
+			<ul class="ml-lg-auto">
+                     <li class="mr-3">
+                        <a href="">Home</a>
+                     </li>
+                     <li class="mr-3">
+                        <a href="http://gogetscore.sheenz.in/about-us.php">About Us</a>
+                     </li>
+                     <li class="mr-3">
+                        <a href="http://gogetscore.sheenz.in/term-and-condition.php">Terms &amp; Conditions</a>
+                     </li>
+					 <li class="mr-3">
+						<a href="http://gogetscore.sheenz.in/privacy-policy.php">Privacy Policy</a>
+					</li>
+                     <li>
+						<a href="http://gogetscore.sheenz.in/contact-us.php">Contact Us</a>
+                     </li>
+                  </ul>
+		</div>
+	  </footer>
+      <!-- footer-->
+      <script src="Gogetscore_files/bootstrap.js"></script>
+      <link rel="stylesheet" href="Gogetscore_files/jquery-ui.css">
+      <script src="Gogetscore_files/jquery-ui.js"></script>
+      <script>	  	  	   $( function() {    $( "#user_dob" ).datepicker({      changeMonth: true,      changeYear: true,	  yearRange: '-80y:c+nn',            maxDate: '-1d'    });  } );      
+         //$( function() {
+           //$( "#user_dob" ).datepicker();		   
+         //} );
+      </script>
+	  <script>
+			$('.date-form-input').click(function(){
+				 $(this).parents('.form-group').addClass('focused');
+				 $('.small-date').show();
+				 $('.large-date').hide();
+			   });
+			</script>
+      <script>
+         $('.form-input').click(function(){
+           $(this).parents('.form-group').addClass('focused');
+         });
+         
+         $('.form-input').blur(function(){
+           var inputValue = $(this).val();
+           if ( inputValue == "" ) {
+             $(this).removeClass('filled');
+             $(this).parents('.form-group').removeClass('focused');  
+           } else {
+             $(this).addClass('filled');
+           }
+         })  
+         
+      </script>
+	  <script>
+	  $('.date-form-input').click(function(){
+           $(this).parents('.form-group').addClass('focused');
+		   $('.small-date').show();
+		   $('.large-date').hide();
+         });
+	  </script>
+   
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body></html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/flick/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<title>jQuery UI Rotatable Examples</title>
+<style>
+body { min-height: 100vh;background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); }
+h1 { margin: 150px auto 30px auto; }
+</style>
+	<script src="jquery.ui.rotatable.js"></script>
+	<link rel="stylesheet" href="jquery.ui.rotatable.css">
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+        var params = {
+            start: function(event, ui) {
+                console.log("Rotating started")
+            },
+            rotate: function(event, ui) {
+                if (Math.abs(ui.angle.current > 6)) {
+                  console.log("Rotating " + ui.angle.current)
+                }
+            },
+            stop: function(event, ui) {
+                console.log("Rotating stopped")
+            },
+        };
+        $('#target').rotatable(params)
+        $('#target2').rotatable(); $('#draggable2').draggable()
+        $('#target3').resizable().rotatable(); $('#draggable3').draggable()
+        $('#target4').rotatable( {degrees: 20} )
+        $('#target5').rotatable( {handle: $(document.createElement('img')).attr('src', 'alternate_rotate.png')} )
+        $('#target5-1').rotatable( {handleOffset: {left: 200}} )
+        $('#target6').rotatable( {snap: true} )
+        $('#target7').rotatable( {wheelRotate: false} )
+        $('#target8').rotatable({
+          rotate: function(e, ui){
+
+            var degrees = ui.angle.current * 180/Math.PI
+            if ( degrees < 0 ) degrees += 360
+
+            // contain angle between 0 and 180 degrees
+            if ( degrees > 270 ) {
+              ui.angle.current = 0
+            } else if ( degrees > 180 ) {
+              ui.angle.current = Math.PI
+            }
+
+          }
+        });
+        $('#target9').rotatable( {transforms: {scaleY: 2}} )
+        $('#target10').rotatable( {rotationCenterOffset: {left: 250}})
+		});
+	</script>
+</head>
+<body>
+  <div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="https://www.jqueryscript.net/other/jQuery-UI-Rotatable-Elements.html">Download This Plugin</a></li>
+<li><a href="https://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+  <h1>jQuery UI Rotatable Examples</h1>
+<div id="target" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
+  Rotate me! (I have callbacks logging to the console)
+</div>
+<div id="draggable2">
+    <div id="target2" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
+      Drag me and rotate me!
+    </div>
+</div>
+<div id="draggable3">
+    <div id="target3" style="width: 360px; height:240px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; background-image: url(https://picsum.photos/600/300/?random);">
+      Drag me, resize me and rotate me!
+    </div>
+</div>
+<div id="target4" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
+  I start rotated.
+</div>
+<div id="target5" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
+  I've got a custom handle.
+</div>
+<div id="target5-1" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
+  My handle has been offset
+</div>
+<div id="target6" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
+  I snap every 22.5&deg;.
+</div>
+<div id="target7" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
+  I don't rotate on wheel.
+</div>
+<div id="target8" style="width: 250px; border: 1px solid #862dde; padding: 20px; margin-bottom: 40px">
+  I only rotate between 0 and 180 degrees.
+</div>
+<div id="target9" style="width: 250px; border: 1px solid #862dde; padding: 0px; padding-right: 40px">
+  I have a scaleY(2) transform applied to me
+</div>
+<div id="target10" style="width: 250px; border: 1px solid #862dde; padding: 20px; margin-top: 40px">
+  My rotation center has been offset to on my far right!
+</div>
+</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

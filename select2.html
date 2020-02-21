@@ -1,0 +1,44 @@
+
+<!doctype html>
+<html class="home">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>select2-bootstrap-theme</title>
+	<link rel="stylesheet" href="https://select2.github.io/select2-bootstrap-theme/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+	<link rel="stylesheet" href="https://select2.github.io/select2-bootstrap-theme/css/select2-bootstrap.css">
+</head>
+
+	<body>
+            <div class="select2-wrapper">
+                    <select class="form-control select2-multiple" multiple="multiple">
+                        <option></option>
+                        <optgroup label="Alaskan/Hawaiian Time Zone">
+            <option value="AK">Alaska</option>
+            <option value="HI" disabled="disabled">Hawaii</option>
+             <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="IN">Indiana</option>
+            <option value="ME">Maine</option>
+            <option value="TPZ">The Panic Zone</option>
+            <option value="TTZ">The Twilight Zone</option>
+        
+                    </select>
+                </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.js"></script>
+
+<script>
+	$( ".select2-multiple" ).select2( {
+		theme: "bootstrap",
+		placeholder: "Select a State",
+		maximumSelectionSize: 10,
+		containerCssClass: ':all:'
+	} );
+
+</script>
+
+	</body>
+</html>

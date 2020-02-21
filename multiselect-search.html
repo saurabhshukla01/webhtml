@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Gogetscore</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />-->
+      <link href="http://gogetscore.sheenz.in//assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" type="text/css" href="http://gogetscore.sheenz.in//assets/css/style.css?.rnd=3444" />
+      <link rel="stylesheet" type="text/css" href="http://gogetscore.sheenz.in//assets/css/style-login.css?.rnd=222" />
+      <link rel="stylesheet" type="text/css" href="http://gogetscore.sheenz.in//assets/css/jquery-nao-input.css" />
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700&display=swap" rel="stylesheet">
+      <!-- <script src="http://gogetscore.sheenz.in//assets/js/jquery-1.11.1.min.js"></script>-->
+      <!---FIREBASE-->
+      <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="http://gogetscore.sheenz.in//assets/js/jquery-nao-input.js?.rnd=1234"></script>
+      <script src="http://gogetscore.sheenz.in//assets/js/jquery-nao-input-age.js"></script>
+      <link rel="manifest" href="http://gogetscore.sheenz.in//manifest.json">
+      <link rel="stylesheet" href="/assets/plugins/bootstrap-sweetalert/sweetalert.min.css">
+      <script src="/assets/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
+      <script src="/assets/plugins/parsleyjs/parsley.min.js"></script>
+      <!-- <script type="text/javascript">
+         $(document).ready(function() {
+             $('form').parsley();
+         });
+         </script>-->
+
+   </head>
+   <body>
+      <!-- header-->
+      <!--Main Navigation-->
+      <header>
+         <!-- top bar start-->
+         <div class="top-main">
+            <div class="number">
+               <h3><i class="fa fa-phone" aria-hidden="true"></i> +91 966 777 3509 </h3>
+               <div class="clearfix"></div>
+            </div>
+            <div class="social-icons">
+               <ul class="top-icons">
+                  <li><a href="https://www.facebook.com/Prudigital-Media-111898976862204/?modal=admin_todo_tour" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                  <li><a href="https://twitter.com/prudigital" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                  <li><a href="https://www.pinterest.com/prudigital" target="_blank"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                  <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+               </ul>
+            </div>
+            <div class="clearfix"></div>
+         </div>
+         <!-- top Bar end -->
+         <div class="logo-container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+               <div class="container">
+                  <h1><a class="navbar-brand text-capitalize" href="#"><img src="http://gogetscore.sheenz.in//assets/images/logo.png" alt="logo" style="width:250px;" /></a></h1>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                     <ul class="navbar-nav text-center  ml-lg-auto">
+                        <li class="nav-item active  mr-3">
+                           <a class="nav-link" href="http://gogetscore.sheenz.in/index">Home
+                           <span class="sr-only">(current)</span>
+                           </a>
+                        </li>
+                        <li class="nav-item  mr-3">
+                           <a class="nav-link" href="#">Credit Card</a>
+                        </li>
+                        <li class="nav-item  mr-3">
+                           <a class="nav-link" href="http://gogetscore.sheenz.in/about-us">About Us</a>
+                        </li>
+                        <li class="nav-item dropdown mr-3">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Loan
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="http://gogetscore.sheenz.in/personal-loan">Personal Loan</a>
+                              <a class="dropdown-item" href="#">Home Loan</a>
+                              <a class="dropdown-item" href="#">Car Loan</a>
+                              <a class="dropdown-item" href="#">Business Loan</a>
+                              <a class="dropdown-item" href="#">Gold Loan</a>
+                           </div>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="http://gogetscore.sheenz.in/contact-us">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                           <div class="nav-login btn" onclick="javascript:user_login();" data-toggle="modal" data-target="#modalLoginForm">Login</div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </nav>
+         </div>
+      </header>
+      <section class="multiselect-search">
+        <div id="ms-list-2" class="ms-options-wrap">
+          <button type="button"><span>Select Languages</span></button>
+          <div class="ms-options" style="min-height: 200px; max-height: 200px;">
+            <div class="ms-search"><input type="text" value="" placeholder="Search"></div>
+              <ul style="column-count: 1; column-gap: 0px;">
+                <li data-search-term="c++"><label for="ms-opt-13"><input type="checkbox" title="C++" id="ms-opt-13" value="C++">C++</label></li>
+                <li data-search-term="c#"><label for="ms-opt-14"><input type="checkbox" title="C#" id="ms-opt-14" value="C#">C#</label></li>
+                <li data-search-term="java"><label for="ms-opt-15"><input type="checkbox" title="Java" id="ms-opt-15" value="Java">Java</label></li>
+                <li data-search-term="objective-c"><label for="ms-opt-16"><input type="checkbox" title="Objective-C" id="ms-opt-16" value="Objective-C">Objective-C</label></li>
+                <li data-search-term="javascript"><label for="ms-opt-17"><input type="checkbox" title="JavaScript" id="ms-opt-17" value="JavaScript">JavaScript</label></li>
+                <li data-search-term="perl"><label for="ms-opt-18"><input type="checkbox" title="Perl" id="ms-opt-18" value="Perl">Perl</label></li>
+                <li data-search-term="php"><label for="ms-opt-19"><input type="checkbox" title="PHP" id="ms-opt-19" value="PHP">PHP</label></li>
+                <li data-search-term="ruby on rails"><label for="ms-opt-20"><input type="checkbox" title="Ruby on Rails" id="ms-opt-20" value="Ruby on Rails">Ruby on Rails</label></li>
+                <li data-search-term="android"><label for="ms-opt-21"><input type="checkbox" title="Android" id="ms-opt-21" value="Android">Android</label></li>
+                <li data-search-term="ios"><label for="ms-opt-22"><input type="checkbox" title="iOS" id="ms-opt-22" value="iOS">iOS</label></li>
+                <li data-search-term="html"><label for="ms-opt-23"><input type="checkbox" title="HTML" id="ms-opt-23" value="HTML">HTML</label></li>
+                <li data-search-term="xml"><label for="ms-opt-24"><input type="checkbox" title="XML" id="ms-opt-24" value="XML">XML</label></li>
+              </ul>
+            </div>
+          </div>
+      </section>
+   </body>
+</html>
